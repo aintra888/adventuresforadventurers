@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solo Travelers Group - AdventuresForAdventurers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f0f2f5;
+        }
+        .top-bar {
+            width: 100%;
+            height: 60px;
+            background-color: #f79c42;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
+        }
+        .top-bar .company-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+        }
+        .top-bar .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            margin-right: 15px;
+        }
+        .group-header {
+            margin-top: 80px;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .group-header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .group-header p {
+            font-size: 1.2rem;
+            color: #555;
+        }
+        .content {
+            display: flex;
+            margin: 20px;
+            justify-content: space-between;
+        }
+        .posts {
+            width: 65%;
+        }
+        .post {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .post-header img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .post-header .post-author {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .post-header .follow-btn {
+            margin-left: auto;
+        }
+        .post-content p {
+            margin: 0;
+            color: #555;
+        }
+        .post img {
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        .sidebar {
+            width: 30%;
+            background-color: #ffffff;
+            padding: 20px;
+            height: fit-content;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .sidebar h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .rules, .related {
+            margin-bottom: 20px;
+        }
+        .rules ul, .related ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .rules ul li, .related ul li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        .create-post {
+            background-color: #f79c42;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .create-post:hover {
+            background-color: #e68935;
+        }
+
+        .follow-btn {
+            background-color: #e68935;
+            color: #fff;
+            justify-content: space-between;
+            border: none;
+            padding: 5px 10px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border-radius: 3px;
+            margin-left: 10px;
+        }
+
+        .follow-btn:hover {
+            background-color: #d5792d;
+        }
+
+        .post-location {
+            color: rgb(82, 82, 245);
+            text-decoration: underline;
+            cursor: pointer; /* Makes it clear the link is clickable */
+            display: block;
+            margin-top: 3px;
+        }
+
+        .comment-location {
+            color: rgb(82, 82, 245);
+            text-decoration: underline;
+            cursor: pointer; /* Makes it clear the link is clickable */
+            display: inline;
+            margin-top: 0;
+        }
+
+        .new-button {
+            background-color: #d5792d;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .new-button:hover {
+            background-color: #d5792d;
+        }
+
+        /* Modal Box CSS */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            width: 300px;
+            border-radius: 8px;
+            position: relative;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: #aaa;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: #000;
+        }
+
+        .add-btn {
+            background-color: #f79c42;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        .add-btn:hover {
+            background-color: #e68935;
+        }
+
+        /* CSS for the Added State */
+        .added-btn {
+            background-color: rgb(209, 207, 207); /* Change background to gray */
+            color: #28a745; /* Green color for the checkmark text */
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: default; /* Change cursor to default to indicate it's already added */
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        .added-btn:before {
+            content: "✔ "; /* Adds a green checkmark before the text */
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="company-title">AdventuresForAdventurers</div>
+        <div class="nav-links">
+            <a href="join-the-community.html" class="return-btn">Return to Website</a>
+        </div>
+    </div>
+    <div class="group-header">
+        <h1>Solo Travelers Group</h1>
+        <p>A place for solo adventurers to share stories, tips, and connect with fellow travelers.</p>
+    </div>
+    <div class="content">
+        <div class="sidebar">
+            <h2>About This Group</h2>
+            <div class="rules">
+                <h3>Rules</h3>
+                <ul>
+                    <li>Be respectful of others.</li>
+                    <li>No spam or self-promotion.</li>
+                    <li>Keep posts travel-related.</li>
+                </ul>
+            </div>
+            <div class="related">
+                <h3>Related Groups</h3>
+                <ul>
+                    <li>Weekend Getaways</li>
+                    <li>Backpackers Unite</li>
+                    <li>Nature Lovers</li>
+                </ul>
+            </div>
+            <button class="new-button">Join This Group</button>
+        </div>
+        <div class="posts">
+            <div class="create-post">Create Post</div>
+            <div class="post">
+                <div class="post-header">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwJngXeAtuXFQIVpvaRqKn5C-afrhX5vNuFw&s" alt="Profile picture" style="width: 25px; height: 25px; border-radius: 50%; margin-right: 10px;">
+                    <div>
+                        <span class="post-author">Juliana Williams</span>
+                        <a href="#" class="post-location">Grand Canyon, USA</a> <!-- Wrapped location in an anchor tag -->
+                    </div>
+                    <button class="follow-btn">Follow</button>
+                </div>
+                
+                <div class="post-content">
+                    <p>Solo hiking is so rewarding! Here's a view from my latest trek to the Grand Canyon. Do you guys have any favorite solo hikes that are fun and safe?</p>
+                    <img src="https://hips.hearstapps.com/hmg-prod/images/766/grandcanyon-1508881242.jpg" alt="Grand Canyon" style="border-radius: 8px; margin-top: 10px;">
+                </div>
+                <div class="replies" style="margin-top: 15px; padding-left: 20px; border-left: 2px solid #e0e0e0;">
+                    <div class="reply">
+                        <span class="reply-author" style="font-weight: 600;">Alex Green:</span> Incredible view! Solo hiking is the best.
+                    </div>
+                    <div class="reply">
+                        <span class="reply-author" style="font-weight: 600;">Jess Brown:</span> The <a href="#" class="comment-location">Cinque Terre</a> trails in Italy are amazing for solo travelers. Gorgeous views and you meet plenty of friendly folks along the way!
+                    </div>
+                    <div class="reply">
+                        <span class="reply-author" style="font-weight: 600;">Jake Vang:</span> The <a href="#" class="comment-location">Laugavegur Trail</a> in Iceland was epic. Challenging, but the landscapes are incredible, and there were lots of fellow hikers to connect with.
+                    </div>
+                </div>
+            </div>
+            <div class="post">
+                <div class="post-header">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYtS6Potuv20PYZeIpkkmYA8SLxgt4U7c1fw&s" alt="Profile picture" style="width: 25px; height: 25px; border-radius: 50%; margin-right: 10px;">
+                    <span class="post-author">Mia Fonza</span>
+                    <button class="follow-btn">Follow</button>
+                </div>
+                <div class="post-content">
+                    <p>Hellow fellow solo travelers! I always make sure to have a backup credit card hidden in my luggage, and I use a decoy wallet for crowded places. What do you guys do?</p>
+                    <img src="https://images.unsplash.com/photo-1614260938313-a7fc1a7ad0d2?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZW1wdHklMjB3YWxsZXR8ZW58MHx8MHx8fDA%3D" alt="Wallet" style="border-radius: 8px; margin-top: 10px;">
+                </div>
+                <div class="replies" style="margin-top: 15px; padding-left: 20px; border-left: 2px solid #e0e0e0;">
+                    <div class="reply">
+                        <span class="reply-author" style="font-weight: 600;">Bryant Orr:</span> Omg I use a money belt under my clothes and avoid wearing flashy jewelry. Maybe I should try your method for the wallet!
+                    </div>
+                    <div class="reply">
+                        <span class="reply-author" style="font-weight: 600;">Leona Fisher:</span> I always share my real-time location with a friend back home.
+                    </div>
+                    <div class="reply">
+                        <span class="reply-author" style="font-weight: 600;">Amari McFarland:</span> Me too Leona!
+                    </div>
+                </div>
+            </div>
+            <div class="post">
+                <div class="post-header">
+                    <img src="https://photosbulk.com/wp-content/uploads/girl-profile-picture-instagram_107.webp" alt="Profile picture" style="width: 25px; height: 25px; border-radius: 50%; margin-right: 10px;">
+                    <span class="post-author">Cali Greene</span>
+                    <button class="follow-btn">Follow</button>
+                </div>
+                <div class="post-content">
+                    <p>Do you have any cafés that you recommend for meeting other travelers?</p>
+                    <img src="https://katieleigh.wordpress.com/wp-content/uploads/2011/02/valencia-cafe.jpeg" alt="Cafe" style="border-radius: 8px; margin-top: 10px;">
+                </div>
+                <div class="replies" style="margin-top: 15px; padding-left: 20px; border-left: 2px solid #e0e0e0;">
+                    <div class="reply">
+                        <span class="reply-author" style="font-weight: 600;">Emerie Wade:</span> If you ever make it to Lisbon, check out <a href="#" class="comment-location">Hello, Kristof</a>. It's super popular among remote workers and travelers—you’ll find someone interesting to chat with for sure!
+                    </div>
+                    <div class="reply">
+                        <span class="reply-author" style="font-weight: 600;">Kadence Lewis:</span> <a href="#" class="comment-location">Café Central</a> in Vienna is a classic. It’s a bit more touristy, but the vibe is great, and I met a few fellow solo travelers there.
+                    </div>
+                    <div class="reply">
+                        <span class="reply-author" style="font-weight: 600;">Darren Howard:</span> <a href="#" class="comment-location">Revolver Espresso</a> in Bali is my go-to. Always friendly people, plus you can't beat the coffee and the atmosphere.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+    <button class="bucketlist-button">My Travel Bucketlist</button>   
+
+    <!-- Modal Box HTML -->
+    <div id="bucketlistModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <p>Add to Your Travel Bucketlist</p>
+            <button class="add-btn">Add</button>
+        </div>
+    </div>
+    <script>
+        // Get the modal
+        var modal = document.getElementById("bucketlistModal");
+    
+        // Get all location links
+        var locationLinks = document.querySelectorAll(".post-location, .comment-location");
+    
+        // Get the close button
+        var closeBtn = document.querySelector(".close-btn");
+    
+        // When a location link is clicked, open the modal
+        locationLinks.forEach(function(link) {
+            link.addEventListener("click", function(event) {
+                event.preventDefault(); // Prevent default link behavior
+                modal.style.display = "block"; // Show the modal
+            });
+        });
+    
+        // When the user clicks on the close button (x), close the modal
+        closeBtn.addEventListener("click", function() {
+            modal.style.display = "none";
+            resetAddButton(); // Reset the Add button when the modal is closed
+        });
+    
+        // When the user clicks anywhere outside of the modal content, close the modal
+        window.addEventListener("click", function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                resetAddButton(); // Reset the Add button when clicking outside the modal
+            }
+        });
+    
+        // Get all Add buttons
+        var addButtons = document.querySelectorAll(".add-btn");
+    
+        // When the Add button is clicked, change its state
+        addButtons.forEach(function(button) {
+            button.addEventListener("click", function() {
+                button.textContent = "Added"; // Change button text to "Added"
+                button.classList.remove("add-btn"); // Remove the original add button styles
+                button.classList.add("added-btn"); // Add the new styles for the added button
+            });
+        });
+    
+        // Function to reset the Add button to its original state
+        function resetAddButton() {
+            addButtons.forEach(function(button) {
+                if (button.classList.contains("added-btn")) {
+                    button.textContent = "Add"; // Change text back to "Add"
+                    button.classList.remove("added-btn"); // Remove added button styles
+                    button.classList.add("add-btn"); // Add the original add button styles
+                }
+            });
+        }
+    </script>
+</body>
+</html>

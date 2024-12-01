@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Adventures - AdventuresForAdventurers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            z-index: 9999;
+            overflow: visible;
+        }
+        .dropbtn {
+            background-color: #f79c42;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            width: 160px;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute; /* Changed to absolute to ensure dropdown is positioned relative to the dropdown container */
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 10000; /* Set very high to keep dropdown on top of everything else */
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        .dropdown:hover .dropbtn, .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown:hover .dropbtn {
+            background-color: #e68935;
+        }
+        
+        .search-bar {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+        }
+        .search-bar input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .search-bar button {
+            background-color: #f79c42;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .search-bar button:hover {
+            background-color: #e68935;
+        }
+        .top-bar {
+            width: 100%;
+            height: 60px;
+            background-color: #f79c42;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5px;
+        }
+        .top-bar .company-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+        }
+        .top-bar .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .top-bar .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .browse-header {
+            
+            text-align: center;
+        }
+        .browse-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .adventures-list {
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .adventure-item {
+            position: relative;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: visible; /* Allow dropdowns to be visible above adventure items */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            z-index: 1; /* Lower z-index to avoid overlapping the dropdown */
+        }
+        .adventure-item:hover {
+            transform: scale(1.05);
+        }
+        .adventure-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .adventure-content {
+            padding: 1rem;
+        }
+        .adventure-content h3 {
+            font-size: 1.5rem;
+            margin: 0;
+            margin-bottom: 1rem;
+        }
+        .adventure-content p {
+            margin: 0;
+            margin-bottom: 1rem;
+        }
+        .adventure-content .btn {
+            background-color: #f79c42;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const adventureItems = document.querySelectorAll('.adventure-item');
+        const dropdownLinks = document.querySelectorAll('.dropdown-content a');
+        const searchButton = document.querySelector('.search-bar button');
+        const searchInput = document.querySelector('.search-bar input[type="text"]');
+        const resetButton = document.querySelector('.reset-button');
+
+        function filterAdventures(filter) {
+            adventureItems.forEach(item => {
+                const adventureType = item.getAttribute('data-type').toLowerCase();
+                if (filter === 'all' || adventureType === filter) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        dropdownLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                const filter = link.getAttribute('data-filter');
+                dropdownLinks.forEach(l => l.classList.remove('active-filter'));
+                link.classList.add('active-filter');
+                filterAdventures(filter);
+            });
+        });
+
+        searchButton.addEventListener('click', function() {
+            const searchTerm = searchInput.value.toLowerCase();
+            adventureItems.forEach(item => {
+                const adventureLocation = item.getAttribute('data-location').toLowerCase();
+                if (adventureLocation.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        if (resetButton) {
+            resetButton.addEventListener('click', function() {
+                dropdownLinks.forEach(l => l.classList.remove('active-filter'));
+                searchInput.value = "";
+                adventureItems.forEach(item => {
+                    item.style.display = 'block';
+                });
+            });
+        }
+    });
+</script>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="company-title">AdventuresForAdventurers</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="browse.html">Browse</a>
+            <a href="join-the-community.html">Join the Community</a>
+            <a href="create-and-share.html">Create and Share</a>
+        </div>
+    </div>
+    <section class="browse-header" style="margin: 0; padding: 0; display: flex; height: 600px; width: 100%; overflow: hidden;">
+        <div style="flex: 1; background: url('https://cdn.aarp.net/content/dam/aarp/travel/travel_tips/2023/05/1140-friends-hiking.png') no-repeat center center/cover; filter: brightness(50%);"></div>
+        <div style="flex: 1; background: url('https://www.storylines.com/hs-fs/hubfs/Blogs/Experiential%20Travel/Experiential%20travel%20involves%20local%20culture%20and%20wildlife%20like%20this%20elephant%20visiting%20tourist%20with%20a%20local%20women%20present.jpg?width=800&height=595&name=Experiential%20travel%20involves%20local%20culture%20and%20wildlife%20like%20this%20elephant%20visiting%20tourist%20with%20a%20local%20women%20present.jpg') no-repeat center center/cover; filter: brightness(50%);"></div>
+        <div style="flex: 1; background: url('https://www.dacgroup.com/wpe-content/uploads/2019/05/19Q2-Creative-Blog-DAC-Authentic-Local-Travel-Experience-Cover-Image.jpg') no-repeat center center/cover; filter: brightness(50%);"></div>
+        <div style="position: absolute; top: 35%; left: 50%; transform: translate(-50%, -50%); width: 100%; text-align: center; color: #fff;">
+            <h1>Browse Our Adventures</h1>
+        Explore unique experiences and find the adventure that calls to you.</p>
+        <div class="filter-bar" style="display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 20px;">
+            <button class="reset-button" style="background-color: #f79c42; color: #fff; padding: 10px; border: none; cursor: pointer; font-size: 16px;">Reset Filters</button>
+            <div class="dropdown">
+                <button class="dropbtn">Sort by Type</button>
+                <div class="dropdown-content">
+                    <a href="#" data-filter="all">All Adventures</a>
+                    <a href="#" data-filter="Culinary">Culinary Adventures</a>
+                    <a href="#" data-filter="Art & Music">Art & Music Adventures</a>
+                    <a href="#" data-filter="Historic">Historic Adventures</a>
+                    <a href="#" data-filter="Adrenaline">Adrenaline Adventures</a>
+                    <a href="#" data-filter="Mystery">Mystery Adventures</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">Sort by Location</button>
+                <div class="dropdown-content">
+                    <a href="#" data-filter="all">All Locations</a>
+                    <a href="#" data-filter="asia">Asia</a>
+                    <a href="#" data-filter="australia">Australia</a>
+                    <a href="#" data-filter="south-america">South America</a>
+                    <a href="#" data-filter="europe">Europe</a>
+                    <a href="#" data-filter="north-america">North America</a>
+                    <a href="#" data-filter="africa">Africa</a>
+                </div>
+            </div>
+            <div class="dropdown" style="display: flex; align-items: center; gap: 10px;">
+                <button class="dropbtn">Sort by Price</button>
+                <div class="dropdown-content">
+                    <a href="#" data-filter="low">Low to High</a>
+                    <a href="#" data-filter="high">High to Low</a>
+                </div>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search adventures...">
+                    <button>Search</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="adventures-list">
+        <div class="adventure-item" data-location="Kyoto, Japan" data-type="Culinary" style="position: relative;">
+            <div class="adventure-overlay" style="background-image: url('https://www.pelago.com/img/destinations/kyoto/1129-0642_kyoto-xlarge.webp'); background-size: cover; background-position: center; filter: brightness(30%); position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 1;"></div>
+            <div class="adventure-content" style="position: relative; z-index: 2; color: white;">
+                <h3>Kyoto, Japan: Hidden Culinary Journey</h3>
+                <p>Explore Kyoto's hidden culinary delights with guided market tours, a cooking class with a local chef, and secret food experiences in lesser-known spots.</p>
+                <p><strong>Duration:</strong> 4 Days</p>
+                <p><strong>Price:</strong> $200</p>
+                <a href="kyoto-culinary.html" class="btn">Learn More</a>
+                </div>
+           </div>
+        <div class="adventure-item" data-location="Tuscany, Italy" data-type="Culinary" style="position: relative;">
+            <div class="adventure-overlay" style="background-image: url('https://internationalliving.com/_next/image/?url=https%3A%2F%2Fimages.ctfassets.net%2Fwv75stsetqy3%2F1VpTI6r8MjAYngQEcMEWFV%2Fe9f7253fd8aec4d8628e188d84f33517%2FTuscany__Italy.jpg%3Fw%3D1800%26h%3D600%26q%3D60%26fit%3Dfill%26fm%3Dwebp&w=3840&q=60'); background-size: cover; background-position: center; filter: brightness(30%); position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 1;"></div>
+            <div class="adventure-content" style="position: relative; z-index: 2; color: white;">
+                <h3>Tuscany, Italy: Farm-to-Table Experience</h3>
+                <p>Discover Tuscany's farm-to-table culture through bike rides, vineyard visits, cheese-making, and cooking classes, culminating in a scenic picnic adventure.</p>
+                <p><strong>Duration:</strong> 5 Days</p>
+                <p><strong>Price:</strong> $250</p>
+                <a href="#" class="btn">Learn More</a>
+                </div>
+           </div>
+        <div class="adventure-item" data-location="Patagonia, south-america" data-type="Mystery" style="position: relative;">
+            <div class="adventure-overlay" style="background-image: url('https://s3.us-west-1.amazonaws.com/assets.activeadventures.com/public/South-America/Chile-Patagonia.jpg'); background-size: cover; background-position: center; filter: brightness(30%); position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 1;"></div>
+            <div class="adventure-content" style="position: relative; z-index: 2; color: white;">
+                <h3>Patagonia, Region in South America: Mystery Adventure</h3>
+                <p>A three-day adventure in Patagonia where every detail is a surprise. A surprise-filled adventure in Patagonia where the itinerary remains a secret, offering unexpected activities and breathtaking moments recommended by local experts.</p>
+                <p><strong>Duration:</strong> 3 Days</p>
+                <p><strong>Price:</strong> $150</p>
+                <a href="#" class="btn">Learn More</a>
+                </div>
+           </div>
+        <div class="adventure-item" data-location="Berlin, Germany" data-type="Art & Music" style="position: relative;">
+            <div class="adventure-overlay" style="background-image: url('https://theplanetd.com/images/places-to-visit-in-berlin-germany.jpg'); background-size: cover; background-position: center; filter: brightness(30%); position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 1;"></div>
+            <div class="adventure-content" style="position: relative; z-index: 2; color: white;">
+                <h3>Berlin, Germany: Underground Music & Art Adventure</h3>
+                <p>Experience Berlin's underground art scene with a street art tour, a graffiti workshop, and locations of amazing speakeasies with live music for an immersive cultural adventure.</p>
+                <p><strong>Duration:</strong> 4 Days</p>
+                <p><strong>Price:</strong> $200</p>
+                <a href="#" class="btn">Learn More</a>
+                </div>
+           </div>
+        <div class="adventure-item" data-location="Ireland" data-type="Historic" style="position: relative;">
+            <div class="adventure-overlay" style="background-image: url('https://images.ireland.com/media/Images/Tipperary/aafe8401d6a1418cb65e2767f330c94b.jpg?w=1934'); background-size: cover; background-position: center; filter: brightness(30%); position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 1;"></div>
+            <div class="adventure-content" style="position: relative; z-index: 2; color: white;">
+                <h3>Ireland: Legends & Mystic Trails</h3>
+                <p>Follow the trail of Irish legends through scenic landscapes, ancient stone circles, and ruined castles, and a two-day guided tour to learn about the ancient and legends and lore of beautiful Ireland.</p>
+                <p><strong>Duration:</strong> 5 Days</p>
+                <p><strong>Price:</strong> $250</p>
+                <a href="#" class="btn">Learn More</a>
+                </div>
+           </div>
+       <div class="adventure-item" data-location="Queenstown, New Zealand" data-type="Adrenaline" style="position: relative;">
+         <div class="adventure-overlay" style="background-image: url('https://ik.imgkit.net/3vlqs5axxjf/TAW/ik-seo/uploadedImages/All_Gateways/ASPAC/Australia_-_South_Pacific/TAW_191111_FLDNTS_ESPNZ_HERO/A-Must-Do-Travel-Guide-to-Queenstown-New-Zealand.jpg?tr=w-1008%2Ch-567%2Cfo-auto'); background-size: cover; background-position: center; filter: brightness(30%); position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 1;"></div>
+         <div class="adventure-content" style="position: relative; z-index: 2; color: white;">
+             <h3>Queenstown, New Zealand: Adrenaline Adventure</h3>
+             <p>An action-packed adventure in Queenstown featuring bungee jumping, jet boating, paragliding, and a surprise glowworm cave visit, guided by local adrenaline experts.</p>
+             <p><strong>Duration:</strong> 3 Days</p>
+             <p><strong>Price:</strong> $150</p>
+             <a href="#" class="btn">Learn More</a>
+             </div>
+        </div>
+    </section>
+</body>
+</html>

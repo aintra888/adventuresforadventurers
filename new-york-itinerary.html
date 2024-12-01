@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New York 5-Day Itinerary - AdventuresForAdventurers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f0f2f5;
+        }
+
+        .top-bar {
+            width: 100%;
+            height: 60px;
+            background-color: #f79c42;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
+        }
+
+        .top-bar .company-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .top-bar .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            margin-right: 15px;
+        }
+
+        .content {
+            margin-top: 80px;
+            padding: 20px;
+        }
+
+        .itinerary-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .day-title {
+            font-size: 1.8rem;
+            color: #f79c42;
+            margin-bottom: 10px;
+        }
+
+        .activity {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .activity p {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .activity button {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #e68935;
+        }
+
+        .activity button:hover {
+            color: #d64f27;
+        }
+
+        .add-activity {
+            background-color: #f79c42;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        .add-activity:hover {
+            background-color: #d5792d;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="company-title">AdventuresForAdventurers</div>
+        <div class="nav-links">
+            <a href="my-travel-bucketlist.html" class="return-btn">Return to My Travel Bucketlist</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <h1>New York 5-Day Itinerary</h1>
+        
+        <!-- Day 1 -->
+        <div class="itinerary-container" id="day1">
+            <div class="day-title">Day 1</div>
+            <div class="activity">
+                <p>Central Park: Start your day by taking a relaxing stroll through Central Park. Walk through the Bethesda Terrace, visit Bow Bridge, and make your way to the Conservatory Garden.</p>
+                <button onclick="removeActivity(this)">-</button>
+            </div>
+            <div class="activity">
+                <p>Joe's Pizza: Enjoy a classic New York slice at Joe's Pizza in Greenwich Village.After pizza, consider grabbing a quick treat at Levain Bakery for their famous cookies.</p>
+                <button onclick="removeActivity(this)">-</button>
+            </div>
+            <div class="activity">
+                <p>The Metropolitan Museum of Art: Spend the afternoon exploring the vast collection at the Met. Focus on key sections, such as the Egyptian Temple of Dendur and the European Paintings.</p>
+                <button onclick="removeActivity(this)">-</button>
+            </div>
+            <div class="activity">
+                <p>Catch a Broadway show in the Theater District. Consider booking tickets in advance for popular shows like Hamilton, Wicked, or The Lion King.</p>
+                <button onclick="removeActivity(this)">-</button>
+            </div>
+            <div class="activity">
+                <p>Le Bernardin: End your day with a fine dining experience at Le Bernardin, known for its world-class seafood dishes.</p>
+                <button onclick="removeActivity(this)">-</button>
+            </div>
+            <button class="add-activity" onclick="addActivity('day1')">+ Add Activity</button>
+        </div>
+
+        <!-- Day 2 to Day 5 (Repeat similar structure as Day 1 for each day) -->
+        <!-- Example Day 2 -->
+        <div class="itinerary-container" id="day2">
+            <div class="day-title">Day 2</div>
+            <div class="activity">
+                <p>Lower East Side Tour: Start your day with a walking tour of the Lower East Side. Learn about the immigrant history of the neighborhood, and visit the Tenement Museum for a deeper look into the lives of past residents.</p>
+                <button onclick="removeActivity(this)">-</button>
+            </div>
+            <div class="activity">
+                <p>Kossar's Bagels & Bialys: Skip Katz's and head to Kossar's for a traditional bialy or bagel with smoked fish. This iconic bakery has been serving locals since 1936.</p>
+                <button onclick="removeActivity(this)">-</button>
+            </div>
+            <div class="activity">
+                <p>Chinatown & Little Italy: Wander through Chinatown and stop at some of the lesser-known spots, like Columbus Park, where you can see locals playing mahjong. Continue into Little Italy and try a cannoli at Caffe Palermo.</p>
+                <button onclick="removeActivity(this)">-</button>
+            </div>
+            <div class="activity">
+                <p>Rubirosa: Enjoy Italian-American cuisine at Rubirosa, a neighborhood favorite known for its thin-crust pizza and cozy atmosphere.</p>
+                <button onclick="removeActivity(this)">-</button>
+            </div>
+            <button class="add-activity" onclick="addActivity('day2')">+ Add Activity</button>
+        </div>
+
+        <div class="itinerary-container" id="day2">
+            <div class="day-title">Day 3</div>
+            <div class="activity">
+                <p>The High Line: Start your day by walking the High Line, but explore the smaller streets of Chelsea afterward. Check out the local galleries in the area, like David Zwirner or Pace Gallery.</p>
+                <button onclick="removeActivity(this)">-</button>
+            </div>
+            <div class="activity">
+                <p>Taim Falafel: Grab a quick and delicious falafel pita at Taim in the West Village. It’s a local favorite for vegetarian street food.</p>
+                <button onclick="removeActivity(this)">-</button>
+            </div>
+            <div class="activity">
+                <p>Flatiron District & Madison Square Park: Instead of the Empire State Building, take a guided architecture tour of the Flatiron District to learn about its history. Relax in Madison Square Park afterward.</p>
+                <button onclick="removeActivity(this)">-</button>
+            </div>
+            <div class="activity">
+                <p>Rooftop Bar: Head to Mr. Purple, a rooftop bar on the Lower East Side, for relaxed vibes and great views without the heavy tourist crowds.</p>
+                <button onclick="removeActivity(this)">-</button>
+            </div>
+            <button class="add-activity" onclick="addActivity('day2')">+ Add Activity</button>
+        </div>
+        <div class="itinerary-container" id="day2">
+            <div class="day-title">Day 4</div>
+            <div class="activity">
+                <p>Brooklyn Bridge Walk: Start early and walk across the Brooklyn Bridge, but instead of DUMBO, explore Vinegar Hill, a quiet neighborhood with cobblestone streets and charming houses.</p>
+                <button onclick="removeActivity(this)">-</button>
+            </div>
+            <div class="activity">
+                <p>Miss Ada: Enjoy Mediterranean-inspired small plates at Miss Ada in Fort Greene, with a cozy outdoor patio.</p>
+                <button onclick="removeActivity(this)">-</button>
+            </div>
+            <div class="activity">
+                <p>Bushwick Street Art Tour: Take the subway to Bushwick and do a self-guided tour of the vibrant street art. Stop by Roberta's for a quick snack or drink.</p>
+                <button onclick="removeActivity(this)">-</button>
+            </div>
+            <div class="activity">
+                <p>Claro: Head to Claro in Gowanus for dinner, where you can enjoy authentic Oaxacan dishes made with locally-sourced ingredients.
+
+                </p>
+                <button onclick="removeActivity(this)">-</button>
+            </div>
+            <button class="add-activity" onclick="addActivity('day2')">+ Add Activity</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to remove an activity
+        function removeActivity(button) {
+            const activity = button.parentElement;
+            activity.parentElement.removeChild(activity);
+        }
+
+        // Function to add a new activity
+        function addActivity(dayId) {
+            const dayContainer = document.getElementById(dayId);
+            const newActivity = document.createElement("div");
+            newActivity.classList.add("activity");
+
+            // Create a new input element for the user to type in a custom activity
+            const inputElement = document.createElement("input");
+            inputElement.type = "text";
+            inputElement.placeholder = "Enter a new activity...";
+            inputElement.style.width = "80%";
+            inputElement.style.padding = "10px";
+            inputElement.style.borderRadius = "5px";
+            inputElement.style.border = "1px solid #ccc";
+
+            // Create a button to remove the new activity
+            const removeButton = document.createElement("button");
+            removeButton.innerHTML = "-";
+            removeButton.onclick = function () {
+                removeActivity(removeButton);
+            };
+
+            // Append input and button to the new activity div
+            newActivity.appendChild(inputElement);
+            newActivity.appendChild(removeButton);
+
+            // Append the new activity div to the day container
+            dayContainer.insertBefore(newActivity, dayContainer.querySelector(".add-activity"));
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Travel Bucketlist - AdventuresForAdventurers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f0f2f5;
+        }
+        .top-bar {
+            width: 100%;
+            height: 60px;
+            background-color: #f79c42;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
+        }
+        .top-bar .company-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+        }
+        .top-bar .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            margin-right: 15px;
+        }
+        .content {
+            margin: 80px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .bucketlist-container {
+            width: 80%;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+        .bucketlist-section {
+            margin-bottom: 30px;
+        }
+        .bucketlist-section h2 {
+            font-size: 1.75rem;
+            margin-bottom: 15px;
+            color: #f79c42;
+        }
+        .bucketlist-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .bucketlist-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+            position: relative;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        .bucketlist-item:hover {
+            transform: scale(1.02);
+        }
+        .comment-box {
+            background-color: #ffffff;
+            border-left: 4px solid #f79c42;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .edit-comment {
+            background-color: #e68935;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            border-radius: 5px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: none;
+        }
+        .bucketlist-item:hover .edit-comment {
+            display: block;
+        }
+        .create-adventure-button {
+            background-color: #e68935;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        .create-adventure-button:hover {
+            background-color: #d5792d;
+        }
+
+         /* Modal Box CSS */
+         .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            width: 300px;
+            border-radius: 8px;
+            position: relative;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: #aaa;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: #000;
+        }
+
+        .add-btn {
+            background-color: #f79c42;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        .add-btn:hover {
+            background-color: #e68935;
+        }
+
+        /* CSS for the Added State */
+        .added-btn {
+            background-color: rgb(209, 207, 207); /* Change background to gray */
+            color: #28a745; /* Green color for the checkmark text */
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: default; /* Change cursor to default to indicate it's already added */
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        .added-btn:before {
+            content: "✔ "; /* Adds a green checkmark before the text */
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="company-title">AdventuresForAdventurers</div>
+        <div class="nav-links">
+            <a href="community-feed.html" class="return-btn">Return to Community Feed</a>
+        </div>
+    </div>
+    <div class="content">
+        <div class="bucketlist-container">
+            <h1>My Travel Bucketlist</h1>
+            <div class="bucketlist-section">
+                <h2>United States</h2>
+                <div class="bucketlist-section">
+                    <h3>New York City</h3>
+                    <div class="bucketlist-item">Central Park
+                        <button class="edit-comment">Edit</button>
+                        <div class="comment-box">
+                            <p class="comment"><strong>Comments:</strong></p>
+                            <textarea class="comment-editable" rows="3" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">Enjoy a relaxing picnic in Central Park and take a stroll through the beautiful landscapes.</textarea>
+                        </div>
+                    </div>
+                    <div class="bucketlist-item">Broadway Theatre
+                        <button class="edit-comment">Edit</button>
+                        <div class="comment-box">
+                            <p class="comment"><strong>Comments:</strong></p>
+                            <textarea class="comment-editable" rows="3" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">Experience a world-class Broadway show and immerse yourself in the magic of live theatre.</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="bucketlist-section">
+                    <h3>Los Angeles</h3>
+                    <div class="bucketlist-item">Hollywood Sign
+                        <button class="edit-comment">Edit</button>
+                        <div class="comment-box">
+                            <p class="comment"><strong>Comments:</strong></p>
+                            <textarea class="comment-editable" rows="3" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">Capture a perfect photo of the iconic Hollywood Sign from Griffith Observatory.</textarea>
+                        </div>
+                    </div>
+                    <div class="bucketlist-item">Venice Beach Boardwalk
+                        <button class="edit-comment">Edit</button>
+                        <div class="comment-box">
+                            <p class="comment"><strong>Comments:</strong></p>
+                            <textarea class="comment-editable" rows="3" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">Walk along Venice Beach Boardwalk and enjoy the vibrant atmosphere and street performers.</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bucketlist-container">
+            <div class="bucketlist-section">
+                <h2>Italy</h2>
+                <div class="bucketlist-section">
+                    <h3>Rome</h3>
+                    <div class="bucketlist-item">Colosseum
+                        <button class="edit-comment">Edit</button>
+                        <div class="comment-box">
+                            <p class="comment"><strong>Comments:</strong></p>
+                            <textarea class="comment-editable" rows="3" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">Discover the history of the Colosseum and imagine the gladiator battles of ancient Rome.</textarea>
+                        </div>
+                    </div>
+                    <div class="bucketlist-item">Trevi Fountain
+                        <button class="edit-comment">Edit</button>
+                        <div class="comment-box">
+                            <p class="comment"><strong>Comments:</strong></p>
+                            <textarea class="comment-editable" rows="3" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">Throw a coin into the Trevi Fountain and make a wish, ensuring your return to Rome.</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="bucketlist-section">
+                    <h3>Venice</h3>
+                    <div class="bucketlist-item">St. Mark's Basilica
+                        <button class="edit-comment">Edit</button>
+                        <div class="comment-box">
+                            <p class="comment"><strong>Comments:</strong></p>
+                            <textarea class="comment-editable" rows="3" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">Marvel at the intricate mosaics and stunning architecture of St. Mark's Basilica.</textarea>
+                        </div>
+                    </div>
+                    <div class="bucketlist-item">Rialto Bridge
+                        <button class="edit-comment">Edit</button>
+                        <div class="comment-box">
+                            <p class="comment"><strong>Comments:</strong></p>
+                            <textarea class="comment-editable" rows="3" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">Take in the views of the Grand Canal from the iconic Rialto Bridge.</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bucketlist-container">
+            <div class="bucketlist-section">
+                <h2>Japan</h2>
+                <div class="bucketlist-section">
+                    <h3>Tokyo</h3>
+                    <div class="bucketlist-item">Shibuya Crossing
+                        <button class="edit-comment">Edit</button>
+                        <div class="comment-box">
+                            <p class="comment"><strong>Comments:</strong></p>
+                            <textarea class="comment-editable" rows="3" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">Experience the bustling energy of Shibuya Crossing, one of the busiest intersections in the world.</textarea>
+                        </div>
+                    </div>
+                    <div class="bucketlist-item">Meiji Shrine
+                        <button class="edit-comment">Edit</button>
+                        <div class="comment-box">
+                            <p class="comment"><strong>Comments:</strong></p>
+                            <textarea class="comment-editable" rows="3" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">Visit Meiji Shrine and enjoy a peaceful walk through the surrounding forest.</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="bucketlist-section">
+                    <h3>Kyoto</h3>
+                    <div class="bucketlist-item">Arashiyama Bamboo Grove
+                        <button class="edit-comment">Edit</button>
+                        <div class="comment-box">
+                            <p class="comment"><strong>Comments:</strong></p>
+                            <textarea class="comment-editable" rows="3" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">Walk through the mesmerizing Arashiyama Bamboo Grove and take in the serene atmosphere.</textarea>
+                        </div>
+                    </div>
+                    <div class="bucketlist-item">Fushimi Inari Shrine
+                        <button class="edit-comment">Edit</button>
+                        <div class="comment-box">
+                            <p class="comment"><strong>Comments:</strong></p>
+                            <textarea class="comment-editable" rows="3" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">Hike through the thousands of torii gates at Fushimi Inari Shrine for a spiritual journey.</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="create-adventure-button" onclick="showUpgradePopup()">Create Personalized Adventure</button>
+
+<div id="upgrade-popup" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 10000; align-items: center; justify-content: center;">
+    <div style="background: #fff; padding: 20px; border-radius: 8px; width: 300px; text-align: center; position: relative;">
+        <button onclick="closeUpgradePopup()" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+        <h2>Want to Upgrade Your Account and Create Your Own Personalized Adventures?</h2>
+        <button onclick="upgradeAccount()" style="background-color: #f79c42; color: #fff; border: none; padding: 10px 20px; font-size: 1rem; font-weight: bold; border-radius: 5px; cursor: pointer; margin-top: 20px;">Upgrade for $16.99</button>
+    </div>
+</div>
+<script>
+    // Function to show the upgrade popup
+    function showUpgradePopup() {
+        var popup = document.getElementById("upgrade-popup");
+        popup.style.display = "flex"; // Display the popup as a flex container to center content
+    }
+
+    // Function to close the upgrade popup
+    function closeUpgradePopup() {
+        var popup = document.getElementById("upgrade-popup");
+        popup.style.display = "none"; // Hide the popup
+    }
+
+    // Function to handle the upgrade account action (without alert)
+    function upgradeAccount() {
+        window.location.href = "pick-adventure.html";
+        closeUpgradePopup(); // Close the popup after upgrade
+    }
+
+    // When the user clicks anywhere outside of the modal content, close the modal
+    window.addEventListener("click", function(event) {
+        var popup = document.getElementById("upgrade-popup");
+        if (event.target == popup) {
+            popup.style.display = "none";
+        }
+    });
+</script>
+
+    </div>
+</body>
+</html>

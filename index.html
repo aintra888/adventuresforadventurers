@@ -1,0 +1,157 @@
+<!-- Filename: Index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vacation Travel Agency</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        .top-bar {
+            width: 100%;
+            height: 60px;
+            background-color: #f79c42;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5px;
+        }
+        .top-bar .company-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+        }
+        .top-bar .nav-links {
+            display: flex;
+            gap: 20px; margin-left: -20px;
+        }
+        .top-bar .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .header {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://www.vmcdn.ca/f/files/villagelife/images/travel/travel-general/haseeb-jamil-zbg2-gyo_hm-unsplash.jpg;w=960') no-repeat center center/cover;
+            height: 100vh;
+            color: #fff;
+            position: relative;
+        }
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .header-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .header-content p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+        }
+        .header-content .btn {
+            background-color: #f79c42;
+            color: #fff;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .search-bar {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: flex;
+            overflow: hidden;
+        }
+        .search-bar input, .search-bar select {
+            border: none;
+            padding: 1rem;
+            font-size: 1rem;
+            outline: none;
+        }
+        .search-bar button {
+            background-color: #f79c42;
+            color: #fff;
+            border: none;
+            padding: 1rem;
+            cursor: pointer;
+        }
+        .features {
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .features h2 {
+            margin-bottom: 2rem;
+        }
+        .features .feature-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 2rem;
+        }
+        .features .feature-item img {
+            width: 50px;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="company-title">AdventuresForAdventurers</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="browse.html">Browse</a>
+            <a href="join-the-community.html">Join the Community</a>
+            <a href="create-and-share.html">Create and Share</a>
+        </div>
+    </div>
+    <header class="header" style="margin-top: 60px;">
+        <div class="header-content">
+            <h1>Begin Your Adventure Here</h1>
+            <p>Join us and tons of other travelers, locals, and experts to find authentic and unique travel experiences.</p>
+            
+        </div>
+        
+    </header>
+    <section class="features">
+        <div class="features-container" style="display: flex; justify-content: center; gap: 2rem;">
+        <div class="feature-item">
+            <img src="https://static.thenounproject.com/png/68979-200.png" alt="Pick an Adventure">
+            <h3>Pick an Adventure</h3>
+            <p>Explore unique packages and itineraries crafted by locals, enthusiasts, and experts. Find the adventure that calls to you.</p>
+        </div>
+        <div class="feature-item">
+            <img src="https://static.thenounproject.com/png/1914163-200.png" alt="Connect">
+            <h3>Connect</h3>
+            <p>Join a community of like-minded travelers, connect with locals, and share your experiences for richer, more authentic travel.</p>
+        </div>
+            <div class="feature-item">
+            <img src="https://static-00.iconduck.com/assets.00/upload-icon-2048x2048-eu9n5hco.png" alt="Create and Share">
+            <h3>Create and Share</h3>
+            <p>Create your own adventure package and share it with others. Inspire fellow travelers and earn rewards as part of our growing community.</p>
+        </div>
+    </div>
+    </section>
+</body>
+</html>

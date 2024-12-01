@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create and Share - AdventuresForAdventurers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f2f5;
+        }
+        .top-bar {
+            width: 100%;
+            height: 60px;
+            background-color: #f79c42;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
+        }
+        .top-bar .company-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+        }
+        .top-bar .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            margin-right: 15px;
+        }
+        .content {
+            text-align: center;
+            margin-top: 100px;
+            max-width: 800px;
+        }
+        .content p.intro {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            color: #fff;
+        }
+        .content-wrapper {
+            background: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+            padding: 60px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        .btn {
+            background-color: #f79c42;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+        }
+        .btn:hover {
+            background-color: #e68935;
+        }
+        .disclaimer {
+    font-size: 1.2rem;
+    color: #555;
+    line-height: 1.6;
+    max-width: 1000px; /* Increase this value to widen the text */
+    margin: 0 auto;
+}
+
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="company-title">AdventuresForAdventurers</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="browse.html">Browse</a>
+            <a href="join-the-community.html">Join the Community</a>
+            <a href="create-and-share.html">Create and Share</a>
+        </div>
+    </div>
+    <div class="content" style="height: calc(100vh - 60px); background: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; max-width: 3000px; margin-top: 60px; position: relative;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.4); z-index: 1;"></div>
+        <h1 style="color: #fff; font-size: 3rem; font-weight: bold; text-align: center; position: relative; z-index: 2; max-width: 1000px;">
+            Are you an avid traveler or local who loves their city? Create a unique and authentic travel itinerary using your personal expertise and share it with the world!
+        </h1>        
+        </div>
+    <div class="filter-bar" style="display: flex; justify-content: center; align-items: center; margin-top: 30px;">
+        <a href="#" class="btn">Create the Next Adventure</a>
+        </div>
+    <div class="adventures-list" style="padding: 2rem; max-width: 800px; margin: 0 auto;">
+        <p class="disclaimer">Not all activities will be accepted. Our team checks all activities for safety and quality, ensuring the best experiences for all of our travelers. Those with the best travel plans that make it on our platform will receive part of the commission on sales made. Participate in the unique opportunity letting others in on your little travel secrets!</p>
+    </div>
+    </div>
+</body>
+</html>
